@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grocery Credit Manager</title>
+  <link rel="stylesheet" href="styleshop.css" />
+</head>
+<body>
+  <!-- Button to open separate Admin Site -->
+<div class="card">
+  <button onclick="window.location.href='admin.html'">Go to Admin Site</button>
+</div>
+<div class="card">
+  <h3>🗃️ Backup & Restore Data</h3>
+  <button onclick="backupData()">💾 Backup Data</button>
+  <input type="file" accept="application/json" onchange="restoreData(event)" />
+</div>
+
+  <div class="container">
+    <h1>🛒 Grocery Customer Credit Manager</h1>
+
+    <div class="card">
+      <input type="text" id="customerName" placeholder="Enter customer name" oninput="validateAddCustomer()" />
+      <input type="text" id="customerPhone" placeholder="Enter phone number" oninput="validateAddCustomer()" />
+      <button id="addCustomerBtn" onclick="addCustomer()" disabled>Add Customer</button>
+      <select id="customerList"></select>
+      <button onclick="retrieveCustomer()">Retrieve Info</button>
+    </div>
+    <div id="customersContainer"></div>
+    <div id="retrievedContainer"></div>
+    <div id="priceManager"></div>
+
+    <!-- Admin Panel to Update Item Prices -->
+<div class="card" id="adminPanel">
+  <h3>🛠️ Admin Panel: Update Item Prices</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>Price</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="priceTableBody"></tbody>
+  </table>
+</div>
+
+   <!-- Credit Entry Modal -->
+<div id="itemEntryModal" style="display:none">
+  <h3 id="itemModalTitle">Add Credit Item</h3>
+  <select id="predefinedItem" onchange="onItemSelect()">
+    <option value="">Select Item</option>
+    <option value="Rice">Rice</option>
+    <option value="Sugar">Sugar</option>
+    <option value="Milk">Milk</option>
+    <option value="Oil">Oil</option>
+    <option value="Salt">Salt</option>
+  </select>
+  <input type="text" id="itemName" placeholder="Item name" />
+  <input type="number" id="itemQuantity" placeholder="Quantity" />
+  <select id="unitType">
+    <option value="kg">kg</option>
+    <option value="g">g</option>
+    <option value="litre">litre</option>
+    <option value="ml">ml</option>
+    <option value="piece">piece</option>
+  </select>
+  <input type="number" id="itemPrice" placeholder="Price per unit" />
+  <button onclick="saveCreditItem()">Save Item</button>
+  <button onclick="closeItemModal()">Cancel</button>
+</div>
+
+
+    <!-- Payment Entry Modal -->
+    <div id="paymentEntryModal" style="display:none">
+      <h3 id="paymentModalTitle">Add Payment Entry</h3>
+      <input type="number" id="paymentAmount" placeholder="Enter amount paid" />
+      <button onclick="savePaymentEntry()">Save Payment</button>
+      <button onclick="closePaymentModal()">Cancel</button>
+    </div>
+
+    <!-- Send Receipt and Message -->
+    <div class="card">
+      <h3>📤 Send Receipt to Customer</h3>
+      <button onclick="sendReceiptToWhatsApp()">Send via WhatsApp</button>
+      <button onclick="downloadReceiptPDF()">Download PDF</button>
+    </div>
+  </div>
+
+  <script src="shopjsp.js"></script>
+</body>
+</html>
