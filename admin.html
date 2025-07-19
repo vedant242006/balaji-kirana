@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin - Manage Item Prices</title>
+  <link rel="stylesheet" href="styleshop.css" />
+</head>
+<body>
+  <div class="container">
+    <div id="authModal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); color: white; display: flex; justify-content: center; align-items: center; z-index: 1000;">
+  <div style="background: white; color: black; padding: 20px; border-radius: 8px; text-align: center;">
+    <h2>🔒 Enter Admin PIN</h2>
+    <input type="password" id="adminPinInput" placeholder="Enter PIN" />
+    <button onclick="verifyPin()">Login</button>
+  </div>
+</div>
+
+    <h1>🛠 Admin Panel - Manage Grocery Items</h1>
+
+    <!-- Add New Item Form -->
+    <h2>Add New Item</h2>
+    <input type="text" id="newItemName" placeholder="Item Name" />
+    <select id="newItemUnit">
+      <option value="kg">kg</option>
+      <option value="g">g</option>
+      <option value="litre">litre</option>
+      <option value="ml">ml</option>
+      <option value="piece">piece</option>
+    </select>
+    <input type="number" id="newItemPrice" placeholder="Price" />
+    <button onclick="addNewItem()">➕ Add Item</button>
+    <hr />
+
+    <!-- Item Editor -->
+    <div id="adminItemEditor"></div>
+    <button onclick="saveItemUpdates()">💾 Save Changes</button>
+  </div>
+
+  <script src="items.js"></script>
+  <!-- Add this before admin.js / shopjsp.js -->
+  <script src="admin.js"></script>
+</body>
+</html>
