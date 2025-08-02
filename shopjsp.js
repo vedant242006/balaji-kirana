@@ -212,9 +212,9 @@ function retrieveCustomer() {
 header.className = "receipt-header";
 header.innerHTML = `
   <h2>🧾 Grocery Store Receipt</h2>
-  <p><strong>Store Name:</strong> ABC Grocery Mart<br>
-  <strong>Address:</strong> 123 Market Road, City Center<br>
-  <strong>Phone:</strong> +91-9876543210</p>
+  <p><strong>Store Name:</strong>Balaji kirana<br>
+  <strong>Address:</strong> Gandhi nagar akkalkot road solapur <br>
+  <strong>Phone:</strong> +91-8975284112</p>
   <hr />
   <p><strong>Customer Name:</strong> ${cust.name}<br>
   <strong>Customer Phone:</strong> ${cust.phone}</p>
