@@ -98,24 +98,38 @@ function renderCustomers() {
     table.innerHTML = `<thead><tr><th>Item</th><th>Qty</th><th>Unit</th><th>Price</th><th>Total</th></tr></thead>`;
     const tbody = document.createElement("tbody");
 
+    let visibleLimit = cust.showAll ? cust.credits.length : 3;
     let total = 0;
-   cust.credits.forEach((credit, cIndex) => {
-  const row = document.createElement("tr");
-  row.innerHTML = `
-    <td><input type="text" value="${credit.item}" onchange="updateCreditItem(${index}, ${cIndex}, 'item', this.value)" /></td>
-    <td><input type="number" value="${credit.quantity}" onchange="updateCreditItem(${index}, ${cIndex}, 'quantity', this.value)" /></td>
-    <td>${credit.unit}</td>
-    <td><input type="number" value="${credit.price}" onchange="updateCreditItem(${index}, ${cIndex}, 'price', this.value)" /></td>
-    <td>₹${credit.total.toFixed(2)}</td>
-  `;
-  tbody.appendChild(row);
-  total += credit.total;
-});
+
+    cust.credits.forEach((credit, cIndex) => {
+      if (cIndex < visibleLimit) {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td><input type="text" value="${credit.item}" onchange="updateCreditItem(${index}, ${cIndex}, 'item', this.value)" /></td>
+          <td><input type="number" value="${credit.quantity}" onchange="updateCreditItem(${index}, ${cIndex}, 'quantity', this.value)" /></td>
+          <td>${credit.unit}</td>
+          <td><input type="number" value="${credit.price}" onchange="updateCreditItem(${index}, ${cIndex}, 'price', this.value)" /></td>
+          <td>₹${credit.total.toFixed(2)}</td>
+        `;
+        tbody.appendChild(row);
+      }
+      total += credit.total;
+    });
+
+    table.appendChild(tbody);
+
+    if (cust.credits.length > 3) {
+      const toggleBtn = document.createElement("button");
+      toggleBtn.textContent = cust.showAll ? "Show Less" : `Show More (${cust.credits.length - 3})`;
+      toggleBtn.onclick = () => {
+        customers[index].showAll = !customers[index].showAll;
+        renderCustomers();
+      };
+      card.appendChild(toggleBtn);
+    }
 
     const paymentTotal = cust.payments.reduce((sum, p) => sum + p.amount, 0);
     const balance = total - paymentTotal;
-
-    table.appendChild(tbody);
 
     const totalDiv = document.createElement("div");
     totalDiv.className = "total";
@@ -130,6 +144,7 @@ function renderCustomers() {
     container.appendChild(card);
   });
 }
+
 
 function deleteCustomer(index) {
   if (!confirm("Are you sure you want to delete this customer?")) return;
@@ -421,6 +436,9 @@ function saveAllCustomerData() {
   renderCustomers();
   showToast("✅ All changes saved successfully!");
 }
+const toggleBtn = document.createElement("button");
+toggleBtn.className = "toggle-btn"; // ← add this line
+toggleBtn.textContent = cust.showAll ? "Show Less" : `Show More (${cust.credits.length - 3})`;
 
 // Initialize on page load
 populatePredefinedItems();

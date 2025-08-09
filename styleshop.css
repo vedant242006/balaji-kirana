@@ -200,3 +200,17 @@ button.delete-btn:hover {
   margin-right: 10px;
   padding: 4px;
 }
+button.toggle-btn {
+  background-color: #17a2b8; /* Teal Blue */
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  margin-top: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+button.toggle-btn:hover {
+  background-color: #138496; /* Darker Teal on hover */
+}
