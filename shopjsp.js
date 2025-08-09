@@ -415,8 +415,11 @@ function updateCreditItem(customerIndex, creditIndex, field, value) {
   if (field === 'quantity') credit.quantity = parseFloat(value) || 0;
   if (field === 'price') credit.price = parseFloat(value) || 0;
   credit.total = credit.quantity * credit.price;
+}
+function saveAllCustomerData() {
   saveToStorage();
   renderCustomers();
+  showToast("✅ All changes saved successfully!");
 }
 
 // Initialize on page load

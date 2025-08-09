@@ -8,6 +8,8 @@
 </head>
 <body>
   <!-- Button to open separate Admin Site -->
+   <!-- Language Switch Dropdown -->
+<div id="google_translate_element" style="text-align: right; margin-bottom: 10px;"></div>
 <div class="card">
   <button onclick="window.location.href='admin.html'">Go to Admin Site</button>
 </div>
@@ -26,6 +28,9 @@
       <button id="addCustomerBtn" onclick="addCustomer()" disabled>Add Customer</button>
       <select id="customerList"></select>
       <button onclick="retrieveCustomer()">Retrieve Info</button>
+      <div style="text-align: right; margin-bottom: 20px;">
+  <button onclick="saveAllCustomerData()">💾 Save Customer Changes</button>
+</div>
     </div>
     <div id="customersContainer"></div>
     <div id="retrievedContainer"></div>
@@ -89,5 +94,30 @@
   </div>
 
   <script src="shopjsp.js"></script>
+  <script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'en',
+      includedLanguages: 'en,mr',
+      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+    }, 'google_translate_element');
+  }
+</script>
+<script type="text/javascript" 
+  src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+</script>
+<script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'en',
+      includedLanguages: 'en,mr',
+      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+    }, 'google_translate_element');
+  }
+</script>
+<script type="text/javascript" 
+  src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+</script>
+
 </body>
 </html>
