@@ -8,5 +8,11 @@ const defaultItems = [
   { name: "Soap", unit: "piece", price: 25 }
 ];
 
-// Shared reference for both Admin & Shop
-const predefinedItems = JSON.parse(localStorage.getItem("itemPrices")) || defaultItems;
+let predefinedItems;
+try {
+  const stored = localStorage.getItem("itemPrices");
+  predefinedItems = stored ? JSON.parse(stored) : defaultItems;
+  if (!Array.isArray(predefinedItems)) predefinedItems = defaultItems;
+} catch (e) {
+  predefinedItems = defaultItems;
+}

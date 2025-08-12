@@ -27,9 +27,30 @@ function updateItemUnit(index, value) {
   predefinedItems[index].unit = value;
   saveItemUpdates();
 }
-function updateItemPrice(index, value) {
-  predefinedItems[index].price = parseFloat(value) || 0;
-  saveItemUpdates();
+function updateItemPrice(index, newPrice) {
+  const price = parseFloat(newPrice) || 0;
+  predefinedItems[index].price = price;
+
+  // Auto convert kg ↔ g
+  if (predefinedItems[index].unit === "kg") {
+    const gramItem = predefinedItems.find(i => i.name === predefinedItems[index].name && i.unit === "g");
+    if (gramItem) gramItem.price = price / 1000;
+  } else if (predefinedItems[index].unit === "g") {
+    const kgItem = predefinedItems.find(i => i.name === predefinedItems[index].name && i.unit === "kg");
+    if (kgItem) kgItem.price = price * 1000;
+  }
+
+  // Auto convert litre ↔ ml
+  if (predefinedItems[index].unit === "litre") {
+    const mlItem = predefinedItems.find(i => i.name === predefinedItems[index].name && i.unit === "ml");
+    if (mlItem) mlItem.price = price / 1000;
+  } else if (predefinedItems[index].unit === "ml") {
+    const litreItem = predefinedItems.find(i => i.name === predefinedItems[index].name && i.unit === "litre");
+    if (litreItem) litreItem.price = price * 1000;
+  }
+
+  localStorage.setItem("itemPrices", JSON.stringify(predefinedItems));
+  populatePredefinedItems();
 }
 function deleteItem(index) {
   if (!confirm("❗ Are you sure you want to delete this item?")) return;

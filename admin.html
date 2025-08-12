@@ -7,6 +7,7 @@
 </head>
 <body>
   <!-- Language Switch Dropdown -->
+<div id="toastContainer" style="position:fixed; bottom:20px; right:20px; z-index:1000;"></div>
 <div id="google_translate_element" style="text-align: right; margin-bottom: 10px;"></div>
   <div class="container">
     <div id="authModal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); color: white; display: flex; justify-content: center; align-items: center; z-index: 1000;">
@@ -38,9 +39,8 @@
     <button onclick="saveItemUpdates()">💾 Save Changes</button>
   </div>
 
-  <script src="items.js"></script>
-  <!-- Add this before admin.js / shopjsp.js -->
-  <script src="admin.js"></script>
+ <script src="predefine.js"></script> <!-- shared grocery list -->
+<script src="admin.js"></script>
   <script type="text/javascript">
   function googleTranslateElementInit() {
     new google.translate.TranslateElement({
