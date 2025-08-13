@@ -88,13 +88,15 @@ function renderCustomers() {
     cust.credits.forEach((credit, cIndex) => {
       if (cIndex < visibleLimit) {
         const row = document.createElement("tr");
-        row.innerHTML = `
-          <td><input type="text" value="${credit.item}" onchange="updateCreditItem(${index}, ${cIndex}, 'item', this.value)" /></td>
-          <td><input type="number" value="${credit.quantity}" onchange="updateCreditItem(${index}, ${cIndex}, 'quantity', this.value)" /></td>
-          <td>${credit.unit}</td>
-          <td><input type="number" value="${credit.price}" onchange="updateCreditItem(${index}, ${cIndex}, 'price', this.value)" /></td>
-          <td>₹${credit.total.toFixed(2)}</td>
-        `;
+       row.innerHTML = `
+  <td><input type="text" value="${credit.item}" onchange="updateCreditItem(${index}, ${cIndex}, 'item', this.value)" /></td>
+  <td><input type="number" value="${credit.quantity}" onchange="updateCreditItem(${index}, ${cIndex}, 'quantity', this.value)" /></td>
+  <td>${credit.unit}</td>
+  <td><input type="number" value="${credit.price}" onchange="updateCreditItem(${index}, ${cIndex}, 'price', this.value)" /></td>
+  <td>₹${credit.total.toFixed(2)}</td>
+  <td><button class="delete-btn" onclick="deleteCreditItem(${index}, ${cIndex})">❌</button></td>
+`;
+
         tbody.appendChild(row);
       }
       total += credit.total;
@@ -436,6 +438,14 @@ function saveAllCustomerData() {
   saveToStorage();
   renderCustomers();
   showToast("✅ All changes saved successfully!");
+}
+function deleteCreditItem(customerIndex, creditIndex) {
+  if (!confirm("Are you sure you want to delete this item?")) return;
+
+  customers[customerIndex].credits.splice(creditIndex, 1);
+  saveToStorage();
+  renderCustomers();
+  showToast("🗑️ Item removed!");
 }
 
 // Initialize showAll property for all customers
